@@ -1,6 +1,8 @@
 # Project 1 design comparison
 
-This is a **mathematical design comparison in Project 1**, not an observed ranking of which model earns more. All models use the same game rules, website validator, decision-time observations, posterior $P(V\mid I)$, fitted transition law, and Maker response model. They differ in *policy objective*. Any empirical comparison using a different information set for one model is invalid. A matched-seed, same-environment performance study is proposed for **Project 2, which has not started**.
+This is a **mathematical design comparison in Project 1**, not an observed ranking of which model earns more. The intended comparison holds game rules, validator, information set, posterior, transition law, and Maker response model common while changing the policy objective. A comparison that gives only one model more information cannot isolate differences between objectives. Project 2 also proposes a separate, explicitly labeled experiment that varies information for each model. The matched-seed study **has not started**.
+
+The table describes the intended research policies. The current Python desk uses uncalibrated future-state and bot-fill assumptions, finite Taker action grids and a shared baseline Maker quote; it does not fit the transition law or optimize Maker quotes as the idealized design proposes.
 
 | Property | Profit Maximization | Risk-Adjusted | Capital Preservation |
 | --- | --- | --- | --- |

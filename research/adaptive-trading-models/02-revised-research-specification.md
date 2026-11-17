@@ -28,4 +28,6 @@ All probabilities are **ex ante session** quantities under a common transition m
 
 ## Decision procedure
 
-Before play, fix model, probability version, calibration, seat, and evaluation/training assignment. At each round, read the public state; verify rank visibility; enumerate website-legal Taker actions or Maker quotes; calculate next-state distributions; evaluate each under the *same* fitted continuation law and the model-specific objective; choose by predeclared tie breaks; log recommendation and manually executed action separately. After settlement, append revealed ranks, fills, penalties, realized P&L, capital, peak, and drawdown. Fit new model versions only between training sessions. The working app is not changed by this research document.
+The research target is to fix the model, probability version, calibration, seat, and evaluation/training assignment before play; verify each public observation; evaluate legal actions under a shared fitted continuation law; and record recommendation and executed action separately. After settlement, append revealed ranks and realized outcomes as labels. Fit new model versions only between training sessions.
+
+The current desk approximates this procedure with a finite Taker action grid, uncalibrated simulated future states, and a shared baseline Maker quote; it does not enumerate all website-legal policies or use a fitted bot-response law. The normal Page Reader automatically captures face-up ranks when the read succeeds; the player remains responsible for executing trades and checking the game validator.

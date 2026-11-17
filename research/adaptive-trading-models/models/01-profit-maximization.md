@@ -1,6 +1,8 @@
 # Model 1 — Profit Maximization
 
-**Status:** proposed four-round policy; the live Python ranker implements only a conditional one-round approximation.
+**Status:** the Python desk implements a four-round finite-grid rollout approximation of this objective. It samples future states under uncalibrated assumptions and uses a fixed continuation heuristic; it does not solve the exact Bellman policy below. Maker uses the shared baseline quote.
+
+The mathematical rule and flowchart in this document describe the research target; the deployed approximation is described separately above and in the [model examples](../../../model-examples/model-examples.md).
 
 ## Mathematical decision rule
 

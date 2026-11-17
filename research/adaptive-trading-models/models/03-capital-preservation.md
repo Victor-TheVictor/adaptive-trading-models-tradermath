@@ -1,6 +1,8 @@
 # Model 3 — Capital Preservation
 
-**Status:** selected safety-first research policy. The 400-point line is a user-confirmed research risk threshold, not a confirmed game rule. The drawdown threshold and numerical tie tolerance still require calibration.
+**Status:** the Python desk implements a finite-family approximation of this safety-first objective: it selects one of six position-fraction rules before round-one cards and keeps it fixed. The 400-point line is a research risk threshold, not a game rule. Its default 20% drawdown threshold is illustrative and adjustable; calibration remains pending.
+
+The mathematical rule and flowchart below specify the broader research target, not an exhaustive search performed by the desk. The implementation uses zero tie tolerance and a shared baseline Maker quote; see the [model examples](../../../model-examples/model-examples.md).
 
 ## Lexicographic objective
 
@@ -10,7 +12,7 @@ $$
 C_1(\pi)=P_\pi\left(\min_{1\le r\le4}B_r<400\right),\quad C_2(\pi)=P_\pi(B_4<500),\quad C_3(\pi)=P_\pi(MDD>d_*),\quad C_4(\pi)=-E_\pi[B_4-500].
 $$
 
-Select a policy that lexicographically minimizes $(C_1,C_2,C_3,C_4)$: compare breach probability of the research floor first; only ties advance to terminal principal-loss probability, then calibrated peak-drawdown threshold $d_*$, then expected profit. This choice treats the path below 400 as serious even if later recovery finishes above 400. It avoids arbitrary weights with incompatible units. $d_*$ is predeclared from training and sensitivity analysis; no value is asserted here. Numerical comparisons need a predeclared tolerance based on estimation uncertainty, otherwise microscopic probability differences can dominate profit. The exact tolerance is an open research decision, not silently selected.
+Select a policy that lexicographically minimizes $(C_1,C_2,C_3,C_4)$: compare breach probability of the research floor first; only ties advance to terminal principal-loss probability, then peak-drawdown threshold $d_*$, then expected profit. This choice treats the path below 400 as serious even if later recovery finishes above 400. It avoids arbitrary weights with incompatible units. The desk's initial threshold is 20%, selected before the session and adjustable, but is not calibrated. A predeclared tolerance based on estimation uncertainty is a future research alternative: the current finite-family implementation uses zero tolerance, so small simulated probability differences can dominate profit.
 
 Track the path flags $F_r=\mathbf{1}[\min_{1\le j\le r}B_j<400]$ and $M_r=\mathbf{1}[\max_{1\le j\le r}D_j>d_*]$ in the state. **Choose the complete contingent policy ex ante**, before round 1, and freeze its state-to-action map. At a reached public state, follow that map rather than freshly optimizing the lexicographic vector: after a 400 breach, $C_1$ is already one for every continuation, so local reoptimization can abandon the original commitment. The frozen map still responds to observed capital, peak, visible cards, and remaining opportunities. A deterministic skip in every Taker round is a possible but testable failure mode, especially with an unavoidable Maker round. The policy may take risk-free positive-edge trades and trades that reduce a forced Maker shortfall probability; report participation rate explicitly. A tolerance-based safety set followed by expected profit is a candidate alternative if strict lexicographic priority degenerates.
 

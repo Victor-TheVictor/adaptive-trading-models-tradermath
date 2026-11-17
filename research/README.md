@@ -11,9 +11,9 @@ This directory collects the original research, the historical two-mode algorithm
 | Document | What it contains | Status |
 | --- | --- | --- |
 | [Adaptive trading algorithm](adaptive-trading-models/TraderMath_Adaptive_Algorithm.md) | Self-contained declaration and assumptions, introduction, definitions, derivations, algorithm logic, three flowcharts, complexity, limitations, future Project 2, and notation | Current Project 1 research specification |
-| [Profit Maximization](adaptive-trading-models/models/01-profit-maximization.md) | Four-round expected terminal-profit policy and workflow | Proposed; full policy not implemented |
-| [Risk-Adjusted](adaptive-trading-models/models/02-risk-adjusted.md) | Dynamic squared-new-drawdown objective, coefficient design, and workflow | User-selected primary risk objective; calibration pending |
-| [Capital Preservation](adaptive-trading-models/models/03-capital-preservation.md) | Lexicographic 400/500/path-risk priorities and workflow | User-selected 400 research threshold; calibration pending |
+| [Profit Maximization](adaptive-trading-models/models/01-profit-maximization.md) | Four-round expected terminal-profit objective and workflow | Four-round finite-grid simulation implemented; exact policy and calibration pending |
+| [Risk-Adjusted](adaptive-trading-models/models/02-risk-adjusted.md) | Dynamic squared-new-drawdown objective, coefficient design, and workflow | Four-round risk-adjusted simulation implemented; calibration pending |
+| [Capital Preservation](adaptive-trading-models/models/03-capital-preservation.md) | Lexicographic 400/500/path-risk priorities and workflow | Frozen finite-rule simulation implemented; calibration pending |
 
 ## Supporting research
 

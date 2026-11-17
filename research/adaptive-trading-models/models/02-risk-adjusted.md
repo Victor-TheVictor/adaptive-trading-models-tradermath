@@ -1,6 +1,8 @@
 # Model 2 — Risk-Adjusted
 
-**Status:** user-selected primary dynamic risk objective; no risk-adjusted policy is implemented in the live tool. Coefficients and the probability model remain uncalibrated.
+**Status:** the Python desk implements a four-round simulation approximation of the selected dynamic risk-adjusted objective, with a finite current-action grid and heuristic future decisions. The coefficients and scenario model are uncalibrated; it does not solve the exact Bellman policy. Maker uses the shared baseline quote.
+
+The mathematical rule and flowchart describe the research target; the desk's model-specific display is illustrated in the [model examples](../../../model-examples/model-examples.md).
 
 ## Risk measure selection
 
@@ -24,13 +26,13 @@ $$
 \lambda(s_r)=\mathrm{clip}\left(\lambda_0+\theta_D D_{r-1}+\theta_C\frac{(500-B_{r-1})_+}{100}+\frac{\theta_R}{5-r},\lambda_{min},\lambda_{max}\right).
 $$
 
-Here $\lambda_0,\theta_D,\theta_C,\theta_R,\lambda_{min},\lambda_{max}\ge0$ with $\lambda_{min}\le\lambda_{max}$ are *calibration parameters* in inverse points, not chosen numerical values; the 100-point denominator scales the distance from initial balance 500 to the 400-point research risk threshold into a dimensionless variable. At each round λ changes only after observing a new public state; it is fixed while evaluating that round's candidate actions. Clipping and a frozen parameter vector limit oscillation. Capital deficit and drawdown are correlated, so coefficient fitting needs regularization and sensitivity analysis. Compare this combined function with fixed λ and individual capital/drawdown/remaining-round components on held-out games. If it merely tracks noise, retain the simpler function.
+Here $\lambda_0,\theta_D,\theta_C,\theta_R,\lambda_{min},\lambda_{max}\ge0$ with $\lambda_{min}\le\lambda_{max}$ are *calibration parameters* in inverse points; the 100-point denominator scales the distance from initial balance 500 to the 400-point research risk threshold into a dimensionless variable. The desk exposes illustrative defaults (base 0.02, drawdown 0.02, capital deficit 0.02, round 0.01, bounds 0 and 1); they are adjustable and not calibrated estimates. At each round λ changes only after observing a new public state; it is fixed while evaluating that round's candidate actions. Clipping and a frozen parameter vector limit oscillation. Capital deficit and drawdown are correlated, so coefficient fitting needs regularization and sensitivity analysis. Compare this combined function with fixed λ and individual capital/drawdown/remaining-round components on held-out games. If it merely tracks noise, retain the simpler function.
 
 Bellman recursion uses stage reward $-\lambda(s)L_r^2$: $J_5=B_4-500$ and $J_r(s)=\max_a E[J_{r+1}(s')-\lambda(s)L_r^2\mid s,a]$. This is a precommitted dynamic policy, not a new objective invented after a loss. A larger drawdown increases the proposed penalty only if calibrated $\theta_D>0$; the policy may still take a favorable action if expected final improvement exceeds additional downside cost.
 
 ## Trading and making a market
 
-Enumerate the same legal Taker quantities as Model 1. For each possible $V$, calculate $B_r,H_r,D_r,L_r$ and continuation value. On the Maker round $r=p$, use the shared joint $P(V,Z\mid s,b,a)$ for each legal quote; the downside penalty must include the *combined* three-bot fill outcome. Without a validated response model, use the common baseline quote and report the Maker risk estimate as unavailable.
+The research target enumerates legal Taker quantities and evaluates continuation values. On the Maker round $r=p$, the target requires a shared joint $P(V,Z\mid s,b,a)$ for each quote, including the combined three-bot fill outcome. The desk instead uses a finite Taker grid and a common baseline Maker quote with simulated, uncalibrated fills. Any displayed Maker risk estimate is conditional on those assumptions, not a validated estimate of the game's bot behavior.
 
 In a final-round example, start at $B_3=H_3=596$, with visible ranks $10,6$, one hidden rank uniformly distributed on $\{2,\ldots,14\}$, and sell $q$ at bid 26. Then $E[\Delta]=2q$ and $E[L_4^2]=(1^2+2^2+3^2+4^2)q^2/13=30q^2/13$. The conditional objective is $2q-\lambda(30/13)q^2$ and its continuous optimum is $13/(30\lambda)$, clipped and rounded over the website-legal integers. This demonstrates how a calibrated λ could prefer an intermediate size. No particular λ or quantity is asserted as empirically best.
 

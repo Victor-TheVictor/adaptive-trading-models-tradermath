@@ -1,11 +1,11 @@
 # Adaptive Trading Desk — Illustrated Model Examples
 
-This document explains how the Project 1 Trading Tool processes game state, what its three model views mean, and how to interpret three real game examples. The screenshots show different game states: they **are not a controlled head-to-head comparison** of the models. The application and browser extension source code are private; this guide describes their observed and documented behavior.
+This document explains how the Project 1 Trading Tool processes game state, what its three model views mean, and how to interpret three real game examples. The screenshots show different game states: they **are not a controlled head-to-head comparison** of the models. The application and browser extension source code are private; these examples describe their observed and documented behavior.
 
 ## How the tool processes a game state
 
 1. Open the hosted Adaptive Trading Desk and start a TraderMath Easy Trading Game. Select **Profit Maximization**, **Risk-Adjusted**, or **Capital Preservation**.
-2. In the game, the optional Page Reader extension's **Read current round** action is designed to send the round, seat, balance, quote and face-up ranks to the desk. Check the captured state against the game before calculating. If recognition fails or a field is empty, do not treat that as proof that all cards are hidden; resolve the capture or enter only the face-up ranks manually if the field permits. The reader relies on the page's rendering and needs continued live-site validation.
+2. In the game, select the Page Reader extension's **Read current round** action. It automatically detects face-up ranks and sends them with the round, seat, balance and quote to the desk; there is no need to type the visible ranks during a successful capture. Check the captured state against the game before calculating. If capture fails or the displayed cards do not match, retry with the game and cards visible; do not treat an empty field as proof that all cards are hidden. The reader depends on the page's rendering and needs continued live-site validation.
 3. Confirm the **highest balance so far**. It is needed to compute drawdown. On later rounds, earlier state may need to be supplied if no session capture is available.
 4. Check the model-specific settings, then select **Run simulation**. Read the suggested action and results. The desk does not submit trades: a player must enter the order or quote in the game, whose validator determines whether it is accepted.
 5. If using Capital Preservation, select and start the policy in round 1 before seeing its cards; preserve its frozen policy and risk history through the session. Completed-game outcomes can be recorded separately in the Research log.
