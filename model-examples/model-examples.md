@@ -1,8 +1,8 @@
-# Adaptive Trading Desk — Illustrated User Guide
+# Adaptive Trading Desk — Illustrated Model Examples
 
-This guide explains how the Project 1 Trading Tool is operated, what its three model views mean, and how to interpret three real game examples. The screenshots show different game states: they **are not a controlled head-to-head comparison** of the models. The application and browser extension source code are private; this guide describes their observed and documented behavior.
+This document explains how the Project 1 Trading Tool processes game state, what its three model views mean, and how to interpret three real game examples. The screenshots show different game states: they **are not a controlled head-to-head comparison** of the models. The application and browser extension source code are private; this guide describes their observed and documented behavior.
 
-## Workflow
+## How the tool processes a game state
 
 1. Open the hosted Adaptive Trading Desk and start a TraderMath Easy Trading Game. Select **Profit Maximization**, **Risk-Adjusted**, or **Capital Preservation**.
 2. In the game, the optional Page Reader extension's **Read current round** action is designed to send the round, seat, balance, quote and face-up ranks to the desk. Check the captured state against the game before calculating. If recognition fails or a field is empty, do not treat that as proof that all cards are hidden; resolve the capture or enter only the face-up ranks manually if the field permits. The reader relies on the page's rendering and needs continued live-site validation.
