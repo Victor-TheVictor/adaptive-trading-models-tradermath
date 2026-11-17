@@ -5,7 +5,7 @@ Victor Chen · TraderMath Market Games / Trading Game / Easy
 
 This research project develops three quantitative decision models for a four-round trading game: **Profit Maximization**, **Risk-Adjusted**, and **Capital Preservation**. Each model uses the same decision-time information but has a different objective and approach to risk. The [research collection](research/README.md) contains assumptions, derivations, model flowcharts, limitations, and the original study. The [complete algorithm design](research/adaptive-trading-models/TraderMath_Adaptive_Algorithm.md) explains the common framework and all three models.
 
-The separate [illustrated Trading Tool guide](docs/trading-tool-guide.md) explains how to use the desk, interpret its metrics, and read three real-round examples.
+The separate [illustrated Trading Tool guide](trading-tool-guide/trading-tool-guide.md) explains how to use the desk, interpret its metrics, and read three real-round examples.
 
 ## Information integrity and discovery
 
