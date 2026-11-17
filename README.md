@@ -9,17 +9,17 @@ The [illustrated model examples](model-examples/model-examples.md) explain the t
 
 ## Project in action
 
-**Trading Desk:** The Python-powered desk evaluates a game state and presents a model-specific action and simulated risk metrics. This screenshot shows the Profit Maximization view.
+**Page Reader browser extension:** A JavaScript extension reads the current game page and sends the detected face-up ranks and public round state to the Trading Desk. Its visibility checks were developed and tested using the page's DOM and rendering; they are rule-based, not a trained machine-learning model. Recognition depends on the website and must be checked against the game.
 
-![Adaptive Trading Desk showing the Profit Maximization model, a suggested action, and simulated metrics](model-examples/images/profit-desk.png)
+![Page Reader extension open on a live TraderMath game showing controls to read the current round](model-examples/images/page-reader-extension.png)
 
 **Game context:** The third-party TraderMath interface shows the public cards and market quote that inform the decision.
 
 ![TraderMath Easy Trading Game round showing two face-up cards, one face-down card, and a market quote](model-examples/images/profit-game.png)
 
-**Page Reader browser extension:** A JavaScript extension reads the current game page and sends the detected face-up ranks and public round state to the Trading Desk. Its visibility checks were developed and tested using the page's DOM and rendering; they are rule-based, not a trained machine-learning model. Recognition depends on the website and must be checked against the game.
+**Trading Desk:** The Python-powered desk evaluates a game state and presents a model-specific action and simulated risk metrics. This screenshot shows the Profit Maximization view.
 
-![Page Reader extension open on a live TraderMath game showing controls to read the current round](model-examples/images/page-reader-extension.png)
+![Adaptive Trading Desk showing the Profit Maximization model, a suggested action, and simulated metrics](model-examples/images/profit-desk.png)
 
 **Research log:** Completed-game fields distinguish cards visible at decision time from values revealed at settlement.
 
