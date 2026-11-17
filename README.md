@@ -7,6 +7,44 @@ This research project develops three quantitative decision models for a four-rou
 
 The [illustrated model examples](model-examples/model-examples.md) explain the tool’s interface, its metrics, and three real-round results.
 
+## Project in action
+
+**Trading Desk:** The Python-powered desk evaluates a game state and presents a model-specific action and simulated risk metrics. This screenshot shows the Profit Maximization view.
+
+![Adaptive Trading Desk showing the Profit Maximization model, a suggested action, and simulated metrics](model-examples/images/profit-desk.png)
+
+**Game context:** The third-party TraderMath interface shows the public cards and market quote that inform the decision.
+
+![TraderMath Easy Trading Game round showing two face-up cards, one face-down card, and a market quote](model-examples/images/profit-game.png)
+
+**Research log:** Completed-game fields distinguish cards visible at decision time from values revealed at settlement.
+
+![Local experiment log for recording a completed game's round data and card visibility](model-examples/images/research-log.png)
+
+**Visibility analysis:** The interface groups round outcomes by visible-card count. This screenshot shows the empty state, with no completed games recorded; it is not an experimental result.
+
+![Empty visibility-analysis charts grouped by number of visible cards](model-examples/images/visibility-analysis.png)
+
+## Technical Highlights
+
+- **Python decision engine:** Evaluates three distinct objectives using a finite action grid and simulated four-round paths, with model-specific metrics.
+- **Probability modeling:** Represents hidden-card uncertainty using independent-uniform ranks or a per-round 52-card model; live decisions are designed to use face-up information only.
+- **Simulation and risk:** Estimates final profit, drawdown and threshold breaches under configurable, uncalibrated assumptions for future quotes and bot fills. A fixed seed makes the tool's simulation reproducible, not the live game.
+- **Algorithm design:** Compares Profit Maximization, dynamically weighted Risk-Adjusted scoring and a finite-family Capital Preservation policy with ordered risk priorities.
+- **Data integrity:** Separates decision-time visibility from post-settlement outcomes and documents the observed client-side exposure of a hidden card.
+- **Experiment recording:** Provides browser-local completed-game records, CSV export and visualizations grouped by visible-card count; the screenshots above show an empty example rather than a completed dataset.
+
+## Project Status
+
+| Area | Status |
+| --- | --- |
+| Project 1 research | Three model specifications, assumptions, flowcharts and information-integrity investigation documented. |
+| Trading Desk prototype | Python simulation and model-specific displays implemented as approximations; the normal page reader is designed to capture visible cards and requires continued live validation. |
+| Data and calibration | Recorder and charts implemented; future quote and bot-response assumptions remain uncalibrated. Example screenshots are not a performance study. |
+| Project 2 | Proposed, not started: build and validate a controlled environment for matched three-model and information-condition comparisons. |
+
+The application source, extensions and experimental dataset are maintained privately. This public repository presents research, selected screenshots and illustrative examples.
+
 ## Information integrity and discovery
 
 While building a trading assistant, unusually accurate apparent predictions prompted an investigation of the game's page. One recorded round showed that a card displayed face down had its rank and suit in a front-image element in the browser DOM before a quote was submitted. The post-game summary confirmed the same card. The [investigation](research/adaptive-trading-models/07-data-integrity-and-information-leakage-prevention.md) contains the decision-time and settlement screenshots, a short HTML evidence excerpt, the normal tool's information boundary, and the separation of the experimental Oracle Lab from normal model evaluation. The screenshots document an observation; they do not establish the current state of the third-party website.
@@ -19,8 +57,6 @@ In a few exploratory Oracle Lab games, profitability appeared sensitive to parti
 
 **Project 2 is proposed and has not started.** It will build and validate a controlled environment to compare all three frozen models on matched scenarios and to study partial information versus known current-round hidden cards. Action-dependent fills and bankrolls must be recomputed when strategies differ. Any future conclusions will depend on simulation validity and uncertainty.
 
-## Implementation status and scope
-
-The Python decision tool provides finite-grid, four-round rollout approximations under editable, uncalibrated assumptions about future quotes and bot behavior. It is not an exact solution of the research policies; its outputs do not guarantee performance. This public repository presents the research and selected evidence. The application source, extensions and experimental dataset are maintained privately.
+The Python decision tool provides finite-grid, four-round rollout approximations under editable, uncalibrated assumptions about future quotes and bot behavior. It is not an exact solution of the research policies; its outputs do not guarantee performance.
 
 This is an independent personal research project, not affiliated with or endorsed by TraderMath.
