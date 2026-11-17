@@ -47,7 +47,11 @@ The application source, extensions and experimental dataset are maintained priva
 
 ## Information integrity and discovery
 
-While building a trading assistant, unusually accurate apparent predictions prompted an investigation of the game's page. One recorded round showed that a card displayed face down had its rank and suit in a front-image element in the browser DOM before a quote was submitted. The post-game summary confirmed the same card. The [investigation](research/adaptive-trading-models/07-data-integrity-and-information-leakage-prevention.md) contains the decision-time and settlement screenshots, a short HTML evidence excerpt, the normal tool's information boundary, and the separation of the experimental Oracle Lab from normal model evaluation. The screenshots document an observation; they do not establish the current state of the third-party website.
+While building a trading assistant, unusually accurate apparent predictions prompted an investigation of the game's page. In the recorded round below, a card displayed face down had its rank and suit in the browser DOM before a quote was submitted. The post-game summary confirmed the same card.
+
+![A face-down card in a live game and its exposed 10 of Clubs image metadata in browser developer tools](research/adaptive-trading-models/evidence/decision-time-10-clubs.png)
+
+The screenshot documents one observation; it does not establish the current state of the third-party website. Read the [Data Integrity and Information Leakage Prevention investigation](research/adaptive-trading-models/07-data-integrity-and-information-leakage-prevention.md) for the settlement confirmation, evidence excerpt, normal tool's information boundary, and Oracle Lab separation.
 
 The normal tool is designed to capture face-up ranks automatically while excluding hidden ranks from live decisions. It depends on the site's rendering and requires continued real-game validation. The experimental Oracle Lab intentionally uses exposed current-card metadata and is not a fair-information model. The project does not claim to have repaired the third-party site.
 
