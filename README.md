@@ -17,6 +17,10 @@ The [illustrated model examples](model-examples/model-examples.md) explain the t
 
 ![TraderMath Easy Trading Game round showing two face-up cards, one face-down card, and a market quote](model-examples/images/profit-game.png)
 
+**Page Reader browser extension:** A JavaScript extension reads the current game page and sends the detected face-up ranks and public round state to the Trading Desk. Its visibility checks were developed and tested using the page's DOM and rendering; they are rule-based, not a trained machine-learning model. Recognition depends on the website and must be checked against the game.
+
+![Page Reader extension open on a live TraderMath game showing controls to read the current round](model-examples/images/page-reader-extension.png)
+
 **Research log:** Completed-game fields distinguish cards visible at decision time from values revealed at settlement.
 
 ![Local experiment log for recording a completed game's round data and card visibility](model-examples/images/research-log.png)
@@ -28,6 +32,7 @@ The [illustrated model examples](model-examples/model-examples.md) explain the t
 ## Technical Highlights
 
 - **Python decision engine:** Evaluates three distinct objectives using a finite action grid and simulated four-round paths, with model-specific metrics.
+- **JavaScript browser extension:** Reads the game page's public round state and detects face-up cards using DOM and visibility checks, then passes the captured state to the Python-powered Trading Desk. A separate extension supports the Oracle Lab experiment.
 - **Probability modeling:** Represents hidden-card uncertainty using independent-uniform ranks or a per-round 52-card model; live decisions are designed to use face-up information only.
 - **Simulation and risk:** Estimates final profit, drawdown and threshold breaches under configurable, uncalibrated assumptions for future quotes and bot fills. A fixed seed makes the tool's simulation reproducible, not the live game.
 - **Algorithm design:** Compares Profit Maximization, dynamically weighted Risk-Adjusted scoring and a finite-family Capital Preservation policy with ordered risk priorities.
@@ -54,6 +59,10 @@ While building a trading assistant, unusually accurate apparent predictions prom
 The screenshot documents one observation; it does not establish the current state of the third-party website. Read the [Data Integrity and Information Leakage Prevention investigation](research/adaptive-trading-models/07-data-integrity-and-information-leakage-prevention.md) for the settlement confirmation, evidence excerpt, normal tool's information boundary, and Oracle Lab separation.
 
 The normal tool is designed to capture face-up ranks automatically while excluding hidden ranks from live decisions. It depends on the site's rendering and requires continued real-game validation. The experimental Oracle Lab intentionally uses exposed current-card metadata and is not a fair-information model. The project does not claim to have repaired the third-party site.
+
+**Oracle Lab browser extension:** This separate experimental extension illustrates the effect of the exposure by intentionally reading face-down card metadata when present in the page. Its results are kept separate from the normal models and are not evidence of fair-information performance.
+
+![Separate Oracle Lab test extension open on a TraderMath game page](model-examples/images/oracle-lab-extension.png)
 
 ## From exploration to Project 2
 
